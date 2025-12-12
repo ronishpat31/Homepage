@@ -3,521 +3,774 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ronish Balvantbhai Patel - Academic Homepage</title>
+    <title>Ronish Balvantbhai Patel</title>
     <style>
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-card: #ffffff;
-            --bg-card-hover: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --accent-primary: #1e3a8a;
-            --accent-secondary: #3b82f6;
-            --accent-light: #dbeafe;
-            --border-color: #e2e8f0;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --gradient-start: #1e3a8a;
-            --gradient-end: #3b82f6;
-        }
-
-        [data-theme="dark"] {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #1e293b;
-            --bg-card-hover: #334155;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
-            --accent-primary: #60a5fa;
-            --accent-secondary: #3b82f6;
-            --accent-light: #1e3a5f;
-            --border-color: #334155;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --gradient-start: #1e40af;
-            --gradient-end: #3b82f6;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f7;
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --accent: #0071e3;
+            --accent-hover: #0077ed;
+            --border: #d2d2d7;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #000000;
+            --bg-secondary: #161617;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --accent: #2997ff;
+            --accent-hover: #409cff;
+            --border: #424245;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
-            background: var(--bg-secondary);
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
             transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+        /* Navigation */
+        nav {
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            position: sticky;
+            top: 0;
             z-index: 1000;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 50px;
-            padding: 8px 16px;
+            height: 44px;
+        }
+
+        .nav-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #f5f5f7;
+            text-decoration: none;
+            font-size: 12px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .theme-toggle-nav {
+            background: none;
+            border: none;
+            color: #f5f5f7;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle-nav:hover {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--bg-primary);
+            text-align: center;
+            padding: 60px 0 80px;
+        }
+
+        .profile-photo-container {
+            margin-bottom: 32px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--border);
+            background: var(--bg-secondary);
+            display: block;
+        }
+
+        .profile-photo.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            color: var(--text-secondary);
+        }
+
+        .upload-button {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg-primary);
+            color: white;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-
-        .theme-toggle-icon {
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .theme-toggle:hover .theme-toggle-icon {
-            transform: rotate(20deg);
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-            margin-bottom: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px var(--shadow);
-        }
-
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-            margin-bottom: 5px;
-        }
-
-        .links {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            font-size: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        .links a {
-            display: inline-flex;
-            align-items: center;
-            color: white;
+        .upload-button:hover {
+            background: var(--accent-hover);
+            transform: scale(1.1);
+        }
+
+        #photoInput {
+            display: none;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            line-height: 1.07143;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 6px;
+        }
+
+        .hero .subtitle {
+            font-size: 28px;
+            line-height: 1.14286;
+            font-weight: 400;
+            letter-spacing: 0.007em;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .hero .role {
+            font-size: 21px;
+            line-height: 1.381;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            color: var(--text-secondary);
+        }
+
+        .hero-links {
+            margin-top: 24px;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-links a {
+            color: var(--accent);
             text-decoration: none;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 5px;
-            transition: background 0.3s;
-            font-size: 0.95em;
+            font-size: 17px;
+            transition: color 0.3s;
         }
 
-        .links a:hover {
-            background: rgba(255,255,255,0.3);
+        .hero-links a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
         }
 
+        /* Section Styles */
         section {
-            background: var(--bg-card);
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px var(--shadow);
-            transition: background-color 0.3s ease;
+            padding: 80px 0;
         }
 
-        section h2 {
-            color: var(--accent-primary);
+        .section-alt {
+            background: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        h2 {
+            font-size: 48px;
+            line-height: 1.08349;
+            font-weight: 600;
+            letter-spacing: -0.003em;
+            margin-bottom: 12px;
+        }
+
+        .section-intro {
+            font-size: 21px;
+            line-height: 1.381;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
             margin-bottom: 20px;
-            font-size: 1.8em;
-            border-bottom: 3px solid var(--accent-secondary);
-            padding-bottom: 10px;
-            transition: color 0.3s ease;
         }
 
-        .bio {
-            font-size: 1.05em;
-            line-height: 1.8;
-            color: var(--text-primary);
-        }
-
-        .bio p {
-            margin-bottom: 15px;
-        }
-
-        .research-interests {
+        /* Tags */
+        .tag-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 24px;
         }
 
-        .interest-tag {
-            background: var(--accent-light);
-            color: var(--accent-primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .interest-tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        .publication {
-            margin-bottom: 25px;
-            padding: 18px;
-            background: var(--bg-card-hover);
-            border-radius: 5px;
-            border-left: 4px solid var(--accent-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .publication:hover {
-            transform: translateX(5px);
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        .publication h3 {
+        .tag {
+            background: var(--bg-secondary);
             color: var(--text-primary);
-            margin-bottom: 8px;
-            font-size: 1.1em;
-            line-height: 1.4;
+            padding: 8px 16px;
+            border-radius: 980px;
+            font-size: 14px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
         }
 
-        .publication .authors {
-            color: var(--text-secondary);
-            font-style: italic;
-            margin-bottom: 5px;
-            font-size: 0.95em;
+        [data-theme="dark"] .tag {
+            background: var(--bg-primary);
         }
 
-        .publication .venue {
-            color: var(--text-muted);
-            font-size: 0.9em;
-            margin-bottom: 8px;
+        .tag:hover {
+            transform: translateY(-2px);
         }
 
-        .publication .doi {
-            color: var(--accent-secondary);
-            font-size: 0.85em;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .publication .doi:hover {
-            text-decoration: underline;
-            color: var(--accent-primary);
-        }
-
-        .contact-info {
+        /* Publication Cards */
+        .publication-grid {
             display: grid;
-            gap: 15px;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .publication-card {
+            background: var(--bg-primary);
+            border-radius: 18px;
+            padding: 28px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        [data-theme="dark"] .publication-card {
+            background: var(--bg-secondary);
+        }
+
+        .publication-card:hover {
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+
+        .publication-card h3 {
+            font-size: 21px;
+            line-height: 1.381;
+            font-weight: 600;
+            letter-spacing: 0.011em;
+            margin-bottom: 8px;
+        }
+
+        .publication-venue {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .publication-doi {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .publication-doi:hover {
+            text-decoration: underline;
+        }
+
+        /* Education Cards */
+        .education-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .education-card {
+            background: var(--bg-primary);
+            border-radius: 18px;
+            padding: 28px;
+            border: 1px solid var(--border);
+        }
+
+        [data-theme="dark"] .education-card {
+            background: var(--bg-secondary);
+        }
+
+        .education-card h3 {
+            font-size: 19px;
+            line-height: 1.42105;
+            font-weight: 600;
+            letter-spacing: 0.012em;
+            margin-bottom: 4px;
+        }
+
+        .education-card .institution {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Funding Card */
+        .funding-card {
+            background: var(--bg-primary);
+            border-radius: 18px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        [data-theme="dark"] .funding-card {
+            background: var(--bg-secondary);
+        }
+
+        .funding-card h3 {
+            font-size: 21px;
+            line-height: 1.381;
+            font-weight: 600;
+            letter-spacing: 0.011em;
+            margin-bottom: 8px;
+        }
+
+        .funding-card .funder {
+            font-size: 17px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .funding-card .details {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
         }
 
         .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background: var(--bg-primary);
+            border-radius: 18px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+
+        [data-theme="dark"] .contact-item {
+            background: var(--bg-secondary);
         }
 
         .contact-item strong {
-            min-width: 120px;
-            color: var(--accent-primary);
+            display: block;
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .contact-item span,
+        .contact-item a {
+            font-size: 17px;
+            color: var(--text-primary);
+            text-decoration: none;
         }
 
         .contact-item a {
-            color: var(--accent-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
+            color: var(--accent);
         }
 
         .contact-item a:hover {
             text-decoration: underline;
-            color: var(--accent-primary);
         }
 
-        .funding-item {
-            background: var(--accent-light);
-            padding: 20px;
-            border-radius: 5px;
-            border-left: 4px solid var(--accent-secondary);
-            transition: all 0.3s ease;
+        /* Service Section */
+        .service-list {
+            margin-top: 24px;
         }
 
-        .funding-item h3 {
-            color: var(--accent-primary);
+        .service-list p {
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        .service-list ul {
+            list-style: none;
+            margin-top: 12px;
+            margin-left: 24px;
+        }
+
+        .service-list li {
+            font-size: 17px;
+            line-height: 1.47059;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .service-list li:before {
+            content: "·";
+            margin-right: 12px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 12px;
+            color: var(--text-secondary);
             margin-bottom: 8px;
         }
 
-        .funding-item .funder {
-            color: var(--accent-primary);
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .funding-item .details {
-            color: var(--text-secondary);
-            font-size: 0.9em;
-        }
-
-        .bio ul {
-            margin-left: 20px;
-            margin-top: 10px;
-            color: var(--text-primary);
-        }
-
-        .bio ul li {
-            margin-bottom: 5px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-                padding: 6px 12px;
-                font-size: 0.9em;
+        /* Responsive */
+        @media (max-width: 734px) {
+            .hero h1 {
+                font-size: 40px;
             }
 
-            header h1 {
-                font-size: 1.8em;
-            }
-            
-            header p {
-                font-size: 1em;
-            }
-            
-            section {
-                padding: 20px;
+            .hero .subtitle {
+                font-size: 21px;
             }
 
-            .links {
-                flex-direction: column;
-                align-items: center;
+            h2 {
+                font-size: 32px;
             }
 
-            .links a {
-                width: 200px;
-                justify-content: center;
+            .section-intro {
+                font-size: 17px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <span class="theme-toggle-icon">🌙</span>
-        <span class="theme-toggle-text">Dark</span>
-    </button>
+    <nav>
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle-nav" id="themeToggle" aria-label="Toggle theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
 
-    <div class="container">
-        <header>
-            <h1>Ronish Balvantbhai Patel</h1>
-            <p>Multidisciplinary Researcher & Engineer</p>
-            <p>M&T Bank | Buffalo, New York</p>
-            <div class="links">
-                <a href="https://orcid.org/0009-0009-2052-4227" target="_blank">ORCID</a>
-                <a href="https://scholar.google.com/citations?user=pDzJvmcAAAAJ&hl=en" target="_blank">Google Scholar</a>
-                <a href="http://www.scopus.com/inward/authorDetails.url?authorID=57225923214&partnerID=MN8TOARS" target="_blank">Scopus</a>
-                <a href="https://www.webofscience.com/wos/author/record/ODI-7650-2025" target="_blank">Web of Science</a>
-            </div>
-        </header>
+    <div class="hero">
+        <div class="profile-photo-container">
+            <div class="profile-photo placeholder" id="profilePhoto">👤</div>
+            <label for="photoInput" class="upload-button" title="Upload photo">📷</label>
+            <input type="file" id="photoInput" accept="image/*">
+        </div>
+        <h1>Ronish Balvantbhai Patel</h1>
+        <p class="subtitle">Multidisciplinary Researcher & Engineer</p>
+        <p class="role">M&T Bank · Buffalo, New York</p>
+        <div class="hero-links">
+            <a href="https://orcid.org/0009-0009-2052-4227" target="_blank">ORCID →</a>
+            <a href="https://scholar.google.com/citations?user=pDzJvmcAAAAJ&hl=en" target="_blank">Google Scholar →</a>
+            <a href="http://www.scopus.com/inward/authorDetails.url?authorID=57225923214&partnerID=MN8TOARS" target="_blank">Scopus →</a>
+            <a href="https://www.webofscience.com/wos/author/record/ODI-7650-2025" target="_blank">Web of Science →</a>
+        </div>
+    </div>
 
-        <section>
-            <h2>About Me</h2>
-            <div class="bio">
-                <p>I am a multidisciplinary researcher and engineer whose work bridges electrical and computer engineering, microelectromechanical systems (MEMS), and intelligent sensing technologies. Currently based in Buffalo, New York, I serve at M&T Bank (United States), where I apply my technical expertise and analytical acumen to complex systems engineering and technology-driven innovation.</p>
-                
-                <p>My overarching research endeavor is to develop multifunctional, miniaturized sensor platforms by integrating MEMS devices, flexible substrates, and embedded intelligence. My goal is to enhance real-time monitoring in healthcare and environmental applications, driving the next generation of adaptive, data-aware sensing systems that merge material science with artificial intelligence.</p>
-                
-                <p>I have published influential works in journals such as <em>Electronics Letters</em> and <em>Clinical Radiology</em>, advancing the understanding of flex-circuit resonant chips, thermoresponsive capacitors, and wireless temperature tracking devices. My projects have contributed to the growing field of wearable and implantable sensor systems.</p>
-                
-                <p>As a recipient of the Natural Sciences and Engineering Research Council of Canada (NSERC) grant for Smart Material Transducers and Applications to In Vivo Microsystems, I have demonstrated leadership in the design of intelligent microsystems with biomedical and environmental impact.</p>
-            </div>
-        </section>
+    <section id="about">
+        <div class="container">
+            <h2>About</h2>
+            <p class="section-intro">Bridging engineering disciplines to create intelligent sensing systems.</p>
+            <p>I am a multidisciplinary researcher and engineer whose work bridges electrical and computer engineering, microelectromechanical systems (MEMS), and intelligent sensing technologies. Currently based in Buffalo, New York, I serve at M&T Bank, where I apply my technical expertise and analytical acumen to complex systems engineering and technology-driven innovation.</p>
+            <p>My overarching research endeavor is to develop multifunctional, miniaturized sensor platforms by integrating MEMS devices, flexible substrates, and embedded intelligence. My goal is to enhance real-time monitoring in healthcare and environmental applications, driving the next generation of adaptive, data-aware sensing systems that merge material science with artificial intelligence.</p>
+            <p>I have published influential works in journals such as <em>Electronics Letters</em> and <em>Clinical Radiology</em>, advancing the understanding of flex-circuit resonant chips, thermoresponsive capacitors, and wireless temperature tracking devices.</p>
+            <p>As a recipient of the Natural Sciences and Engineering Research Council of Canada (NSERC) grant for Smart Material Transducers and Applications to In Vivo Microsystems, I have demonstrated leadership in the design of intelligent microsystems with biomedical and environmental impact.</p>
+        </div>
+    </section>
 
-        <section>
+    <section class="section-alt" id="research">
+        <div class="container">
             <h2>Research Interests</h2>
-            <div class="research-interests">
-                <span class="interest-tag">MEMS & Microsystems</span>
-                <span class="interest-tag">Flexible Electronics</span>
-                <span class="interest-tag">Wireless Sensor Networks</span>
-                <span class="interest-tag">Smart Material Transducers</span>
-                <span class="interest-tag">Healthcare IoT</span>
-                <span class="interest-tag">Wearable Sensors</span>
-                <span class="interest-tag">Embedded Intelligence</span>
-                <span class="interest-tag">Cybersecurity in Medical IoT</span>
-                <span class="interest-tag">Deep Learning for Healthcare</span>
+            <p class="section-intro">Exploring the intersection of materials, sensors, and intelligence.</p>
+            <div class="tag-container">
+                <span class="tag">MEMS & Microsystems</span>
+                <span class="tag">Flexible Electronics</span>
+                <span class="tag">Wireless Sensor Networks</span>
+                <span class="tag">Smart Material Transducers</span>
+                <span class="tag">Healthcare IoT</span>
+                <span class="tag">Wearable Sensors</span>
+                <span class="tag">Embedded Intelligence</span>
+                <span class="tag">Cybersecurity in Medical IoT</span>
+                <span class="tag">Deep Learning for Healthcare</span>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
-            <h2>Selected Publications</h2>
-            
-            <div class="publication">
-                <h3>Dynamic Prediction of Malicious Behaviors in Smart Healthcare Devices</h3>
-                <div class="venue">2025 IEEE International Conference on Computing (ICOCO), October 2025</div>
+    <section id="publications">
+        <div class="container">
+            <h2>Publications</h2>
+            <p class="section-intro">Selected works advancing sensor technology and healthcare innovation.</p>
+            <div class="publication-grid">
+                <div class="publication-card">
+                    <h3>Dynamic Prediction of Malicious Behaviors in Smart Healthcare Devices</h3>
+                    <p class="publication-venue">IEEE International Conference on Computing (ICOCO) · October 2025</p>
+                </div>
+
+                <div class="publication-card">
+                    <h3>Smart Risk Prediction for Medical IoT: A Dynamic and Privacy-Preserving Cybersecurity Model</h3>
+                    <p class="publication-venue">IEEE International Conference on Computing (ICOCO) · October 2025</p>
+                </div>
+
+                <div class="publication-card">
+                    <h3>IoT Based Deep Learning Framework for Continuous Healthcare Monitoring of Vital Signs</h3>
+                    <p class="publication-venue">International Conference on Intelligent and Secure Engineering Solutions (CISES) · August 2025</p>
+                    <a href="https://doi.org/10.1109/cises66934.2025.11265584" target="_blank" class="publication-doi">View publication →</a>
+                </div>
+
+                <div class="publication-card">
+                    <h3>Flex-circuit Resonant Chip with Y5V Multilayer Capacitor for Wireless Temperature Tracking</h3>
+                    <p class="publication-venue">Electronics Letters · 2022</p>
+                    <a href="https://doi.org/10.1049/ell2.12448" target="_blank" class="publication-doi">View publication →</a>
+                </div>
+
+                <div class="publication-card">
+                    <h3>Flexible Low-cost Wireless Temperature Sensor Using Thermoresponsive Y5V Capacitor Chips</h3>
+                    <p class="publication-venue">2019</p>
+                    <a href="https://doi.org/10.14288/1.0379893" target="_blank" class="publication-doi">View publication →</a>
+                </div>
+
+                <div class="publication-card">
+                    <h3>The Use of Cone-beam CT in Assisting Percutaneous Translumbar Catheter Placement into the Inferior Vena Cava</h3>
+                    <p class="publication-venue">Clinical Radiology · 2015</p>
+                    <a href="https://doi.org/10.1016/J.CRAD.2014.09.009" target="_blank" class="publication-doi">View publication →</a>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="publication">
-                <h3>Smart Risk Prediction for Medical IoT: A Dynamic and Privacy-Preserving Cybersecurity Model</h3>
-                <div class="venue">2025 IEEE International Conference on Computing (ICOCO), October 2025</div>
-            </div>
-
-            <div class="publication">
-                <h3>IoT Based Deep Learning Framework for Continuous Healthcare Monitoring of Vital Signs</h3>
-                <div class="venue">2025 International Conference on Intelligent and Secure Engineering Solutions (CISES), August 2025</div>
-                <a href="https://doi.org/10.1109/cises66934.2025.11265584" target="_blank" class="doi">DOI: 10.1109/cises66934.2025.11265584</a>
-            </div>
-
-            <div class="publication">
-                <h3>Flex-circuit Resonant Chip with Y5V Multilayer Capacitor for Wireless Temperature Tracking</h3>
-                <div class="venue">Electronics Letters, 2022</div>
-                <a href="https://doi.org/10.1049/ell2.12448" target="_blank" class="doi">DOI: 10.1049/ell2.12448</a>
-            </div>
-
-            <div class="publication">
-                <h3>Flexible Low-cost Wireless Temperature Sensor Using Thermoresponsive Y5V Capacitor Chips</h3>
-                <div class="venue">2019</div>
-                <a href="https://doi.org/10.14288/1.0379893" target="_blank" class="doi">DOI: 10.14288/1.0379893</a>
-            </div>
-
-            <div class="publication">
-                <h3>The Use of Cone-beam CT in Assisting Percutaneous Translumbar Catheter Placement into the Inferior Vena Cava</h3>
-                <div class="venue">Clinical Radiology, 2015</div>
-                <a href="https://doi.org/10.1016/J.CRAD.2014.09.009" target="_blank" class="doi">DOI: 10.1016/J.CRAD.2014.09.009</a>
-            </div>
-        </section>
-
-        <section>
+    <section class="section-alt">
+        <div class="container">
             <h2>Patents & Designs</h2>
-            <div class="publication">
-                <h3>Apparatus for Photolithography Based Micro Fabrication</h3>
-                <div class="venue">UK Patent/Design Registration, 2025</div>
+            <div class="publication-grid">
+                <div class="publication-card">
+                    <h3>Apparatus for Photolithography Based Micro Fabrication</h3>
+                    <p class="publication-venue">UK Patent/Design Registration · 2025</p>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
+    <section>
+        <div class="container">
             <h2>Funding</h2>
-            <div class="funding-item">
+            <div class="funding-card">
                 <h3>Smart Material Transducers and Applications to In Vivo Microsystems</h3>
-                <div class="funder">Natural Sciences and Engineering Research Council of Canada (NSERC)</div>
-                <div class="details">Grant No. RGPIN-2016-04252 | April 2020 - March 2021</div>
+                <p class="funder">Natural Sciences and Engineering Research Council of Canada (NSERC)</p>
+                <p class="details">Grant No. RGPIN-2016-04252 · April 2020 - March 2021</p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
+    <section class="section-alt">
+        <div class="container">
             <h2>Education</h2>
-            <div class="publication">
-                <h3>Master of Applied Science (MASc.) in Electrical and Computer Engineering</h3>
-                <div class="venue">University of British Columbia, Vancouver, BC, Canada | 2016-2019</div>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3>Master of Applied Science (MASc.)</h3>
+                    <p>Electrical and Computer Engineering</p>
+                    <p class="institution">University of British Columbia · 2016-2019</p>
+                </div>
+                <div class="education-card">
+                    <h3>Master of Science (MSc.)</h3>
+                    <p>Electrical and Computer Engineering</p>
+                    <p class="institution">Heriot-Watt University · 2013-2015</p>
+                </div>
             </div>
-            <div class="publication">
-                <h3>Master of Science (MSc.) in Electrical and Computer Engineering</h3>
-                <div class="venue">Heriot-Watt University, Edinburgh, Scotland | 2013-2015</div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
+    <section>
+        <div class="container">
             <h2>Professional Service</h2>
-            <div class="bio">
-                <p><strong>Membership:</strong> Institution of Engineering and Technology (IET), 2025-2026</p>
-                <p><strong>Peer Review:</strong></p>
+            <div class="service-list">
+                <p><strong>Membership</strong></p>
+                <p>Institution of Engineering and Technology (IET) · 2025-2026</p>
+                
+                <p style="margin-top: 24px;"><strong>Peer Review</strong></p>
                 <ul>
                     <li>Scientific Reports (3 reviews)</li>
                     <li>International Journal of System Assurance Engineering and Management (6 reviews)</li>
                 </ul>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
+    <section class="section-alt" id="contact">
+        <div class="container">
             <h2>Contact</h2>
-            <div class="contact-info">
+            <div class="contact-grid">
                 <div class="contact-item">
-                    <strong>Location:</strong>
+                    <strong>Location</strong>
                     <span>Buffalo, New York, United States</span>
                 </div>
                 <div class="contact-item">
-                    <strong>Organization:</strong>
+                    <strong>Organization</strong>
                     <span>M&T Bank</span>
                 </div>
                 <div class="contact-item">
-                    <strong>ORCID:</strong>
+                    <strong>ORCID</strong>
                     <a href="https://orcid.org/0009-0009-2052-4227" target="_blank">0009-0009-2052-4227</a>
                 </div>
                 <div class="contact-item">
-                    <strong>Scopus ID:</strong>
+                    <strong>Scopus ID</strong>
                     <a href="http://www.scopus.com/inward/authorDetails.url?authorID=57225923214&partnerID=MN8TOARS" target="_blank">57225923214</a>
                 </div>
                 <div class="contact-item">
-                    <strong>ResearcherID:</strong>
+                    <strong>ResearcherID</strong>
                     <a href="https://www.webofscience.com/wos/author/record/ODI-7650-2025" target="_blank">ODI-7650-2025</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
-            <p>&copy; 2024 Ronish Balvantbhai Patel. Last updated: December 2024</p>
-            <p style="margin-top: 5px; font-size: 0.85em;">Bridging MEMS, flexible electronics, and intelligent sensing for next-generation adaptive systems</p>
-        </footer>
-    </div>
+    <footer>
+        <div class="container">
+            <p>© 2024 Ronish Balvantbhai Patel. All rights reserved.</p>
+            <p>Bridging MEMS, flexible electronics, and intelligent sensing for next-generation adaptive systems</p>
+        </div>
+    </footer>
 
     <script>
         const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
         const html = document.documentElement;
-        const icon = themeToggle.querySelector('.theme-toggle-icon');
-        const text = themeToggle.querySelector('.theme-toggle-text');
+        const photoInput = document.getElementById('photoInput');
+        const profilePhoto = document.getElementById('profilePhoto');
         
-        // Check for saved theme preference or default to light mode
+        // Theme toggle functionality
         const currentTheme = localStorage.getItem('theme') || 'light';
         html.setAttribute('data-theme', currentTheme);
-        updateToggleButton(currentTheme);
+        updateIcon(currentTheme);
         
         themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
+            const current = html.getAttribute('data-theme');
+            const newTheme = current === 'light' ? 'dark' : 'light';
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            updateToggleButton(newTheme);
+            updateIcon(newTheme);
         });
         
-        function updateToggleButton(theme) {
-            if (theme === 'dark') {
-                icon.textContent = '☀️';
-                text.textContent = 'Light';
-            } else {
-                icon.textContent = '🌙';
-                text.textContent = 'Dark';
-            }
+        function updateIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
         }
+
+        // Photo upload functionality
+        const savedPhoto = localStorage.getItem('profilePhoto');
+        if (savedPhoto) {
+            profilePhoto.style.backgroundImage = `url(${savedPhoto})`;
+            profilePhoto.classList.remove('placeholder');
+            profilePhoto.textContent = '';
+        }
+
+        photoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        // Create canvas to resize image
+                        const canvas = document.createElement('canvas');
+                        const maxSize = 400;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > maxSize) {
+                                height *= maxSize / width;
+                                width = maxSize;
+                            }
+                        } else {
+                            if (height > maxSize) {
+                                width *= maxSize / height;
+                                height = maxSize;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Convert to base64 with compression
+                        const compressedImage = canvas.toDataURL('image/jpeg', 0.8);
+                        
+                        // Save to localStorage
+                        localStorage.setItem('profilePhoto', compressedImage);
+                        
+                        // Update display
+                        profilePhoto.style.backgroundImage = `url(${compressedImage})`;
+                        profilePhoto.style.backgroundSize = 'cover';
+                        profilePhoto.style.backgroundPosition = 'center';
+                        profilePhoto.classList.remove('placeholder');
+                        profilePhoto.textContent = '';
+                    };
+                    img.src = event.target.result;
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
 </body>
 </html>
