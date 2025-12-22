@@ -627,6 +627,178 @@
             letter-spacing: 0.05em;
         }
 
+        /* Awards and Certificates Section */
+        .awards-upload-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding: 24px;
+            background: var(--tertiary-bg);
+            border: 2px dashed var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .awards-upload-container:hover {
+            border-color: var(--accent-primary);
+            background: var(--secondary-bg);
+        }
+
+        .awards-upload-button {
+            background: var(--accent-primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .awards-upload-button:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-medium);
+        }
+
+        .awards-upload-text {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        #certificatesInput {
+            display: none;
+        }
+
+        .certificates-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .certificate-item {
+            position: relative;
+            background: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            transition: all 0.4s ease;
+            box-shadow: 4px 4px 0 var(--shadow-light);
+            cursor: pointer;
+        }
+
+        [data-theme="dark"] .certificate-item {
+            background: var(--tertiary-bg);
+        }
+
+        .certificate-item:hover {
+            box-shadow: 8px 8px 0 var(--shadow-medium);
+            transform: translate(-4px, -4px);
+            border-color: var(--accent-primary);
+        }
+
+        .certificate-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .certificate-item .certificate-title {
+            padding: 12px;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 14px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .certificate-item .certificate-delete {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .certificate-item:hover .certificate-delete {
+            opacity: 1;
+        }
+
+        .certificate-delete:hover {
+            background: rgba(255, 0, 0, 1);
+            transform: scale(1.1);
+        }
+
+        /* Modal for full-size certificate view */
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .certificate-modal.active {
+            display: flex;
+        }
+
+        .certificate-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .certificate-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .certificate-modal-close:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .empty-gallery-message {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+
         /* Contact Section */
         .contact-grid {
             display: grid;
@@ -796,6 +968,10 @@
             nav {
                 margin: 16px;
             }
+
+            .certificates-gallery {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Scroll animations */
@@ -809,11 +985,11 @@
             opacity: 1;
             transform: translateY(0);
         }
-mark {
-  background-color: rgba(201, 238, 250, 0.055);
-  color: rgb(143, 121, 238);
-  /* Add other styles like padding, font-weight, etc. */
-}
+
+        mark {
+            background-color: rgba(201, 238, 250, 0.055);
+            color: rgb(143, 121, 238);
+        }
 
     </style>
 </head>
@@ -825,9 +1001,9 @@ mark {
                 <li><a href="#about">About</a></li>
                 <li><a href="#research">Research</a></li>
                 <li><a href="#publications">Publications</a></li>
+                <li><a href="#awards">Awards</a></li>
                 <li><a href="#recentupdates">Recent Updates</a></li>
                 <li><a href="#contact">Contact</a></li>
-                
             </ul>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <span id="themeIcon">🌙</span>
@@ -1023,10 +1199,35 @@ mark {
             </div>
         </div>
     </section>
- <section id="recentupdates" class="scroll-reveal">
+
+    <section id="awards" class="scroll-reveal">
         <div class="container">
             <div class="section-header">
                 <span class="section-number">08</span>
+                <h2>Awards & Certificates</h2>
+            </div>
+            <p class="section-intro">Recognition and achievements throughout my career.</p>
+            
+            <div class="awards-upload-container">
+                <label for="certificatesInput" class="awards-upload-button">
+                    Upload Certificate
+                </label>
+                <input type="file" id="certificatesInput" accept="image/*" multiple>
+                <span class="awards-upload-text">Add your certificates and awards (supports multiple images)</span>
+            </div>
+
+            <div class="certificates-gallery" id="certificatesGallery">
+                <div class="empty-gallery-message">
+                    No certificates uploaded yet. Click "Upload Certificate" to add your awards and certificates.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recentupdates" class="scroll-reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">09</span>
                 <h2>Recent Updates</h2>
             </div>
            <p style="margin-top: 24px;"><strong>Upcoming Accepted Conference Papers</strong></p>
@@ -1046,7 +1247,7 @@ mark {
     <section id="contact" class="scroll-reveal">
         <div class="container">
             <div class="section-header">
-                <span class="section-number">09</span>
+                <span class="section-number">10</span>
                 <h2>Contact</h2>
             </div>
             <div class="contact-grid">
@@ -1073,6 +1274,12 @@ mark {
         </div>
     </footer>
 
+    <!-- Certificate Modal -->
+    <div class="certificate-modal" id="certificateModal">
+        <button class="certificate-modal-close" id="modalClose">✕</button>
+        <img id="modalImage" src="" alt="Certificate full view">
+    </div>
+
     <script>
         // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
@@ -1080,6 +1287,11 @@ mark {
         const html = document.documentElement;
         const photoInput = document.getElementById('photoInput');
         const profilePhoto = document.getElementById('profilePhoto');
+        const certificatesInput = document.getElementById('certificatesInput');
+        const certificatesGallery = document.getElementById('certificatesGallery');
+        const certificateModal = document.getElementById('certificateModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
         
         const currentTheme = localStorage.getItem('theme') || 'light';
         html.setAttribute('data-theme', currentTheme);
@@ -1152,6 +1364,127 @@ mark {
                 reader.readAsDataURL(file);
             }
         });
+
+        // Certificates management
+        let certificates = JSON.parse(localStorage.getItem('certificates') || '[]');
+
+        function saveCertificates() {
+            localStorage.setItem('certificates', JSON.stringify(certificates));
+        }
+
+        function renderCertificates() {
+            if (certificates.length === 0) {
+                certificatesGallery.innerHTML = `
+                    <div class="empty-gallery-message">
+                        No certificates uploaded yet. Click "Upload Certificate" to add your awards and certificates.
+                    </div>
+                `;
+                return;
+            }
+
+            certificatesGallery.innerHTML = certificates.map((cert, index) => `
+                <div class="certificate-item" data-index="${index}">
+                    <img src="${cert.image}" alt="${cert.title}">
+                    <div class="certificate-title">${cert.title}</div>
+                    <button class="certificate-delete" data-index="${index}">✕</button>
+                </div>
+            `).join('');
+
+            // Add click handlers for viewing
+            document.querySelectorAll('.certificate-item img').forEach(img => {
+                img.addEventListener('click', function() {
+                    modalImage.src = this.src;
+                    certificateModal.classList.add('active');
+                });
+            });
+
+            // Add click handlers for deleting
+            document.querySelectorAll('.certificate-delete').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const index = parseInt(this.dataset.index);
+                    if (confirm('Are you sure you want to delete this certificate?')) {
+                        certificates.splice(index, 1);
+                        saveCertificates();
+                        renderCertificates();
+                    }
+                });
+            });
+        }
+
+        // Certificate upload
+        certificatesInput.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            let processed = 0;
+
+            files.forEach(file => {
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        const img = new Image();
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const maxSize = 800;
+                            let width = img.width;
+                            let height = img.height;
+
+                            if (width > height) {
+                                if (width > maxSize) {
+                                    height *= maxSize / width;
+                                    width = maxSize;
+                                }
+                            } else {
+                                if (height > maxSize) {
+                                    width *= maxSize / height;
+                                    height = maxSize;
+                                }
+                            }
+
+                            canvas.width = width;
+                            canvas.height = height;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0, width, height);
+
+                            const compressedImage = canvas.toDataURL('image/jpeg', 0.7);
+                            
+                            const title = prompt('Enter a title for this certificate:', file.name.replace(/\.[^/.]+$/, ''));
+                            if (title) {
+                                certificates.push({
+                                    image: compressedImage,
+                                    title: title,
+                                    date: new Date().toISOString()
+                                });
+
+                                processed++;
+                                if (processed === files.length) {
+                                    saveCertificates();
+                                    renderCertificates();
+                                    certificatesInput.value = '';
+                                }
+                            }
+                        };
+                        img.src = event.target.result;
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        // Modal close handlers
+        modalClose.addEventListener('click', () => {
+            certificateModal.classList.remove('active');
+        });
+
+        certificateModal.addEventListener('click', (e) => {
+            if (e.target === certificateModal) {
+                certificateModal.classList.remove('active');
+            }
+        });
+
+        // Initial render
+        renderCertificates();
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1328,11 +1661,6 @@ mark {
         // Initialize and start animation
         initParticles();
         animate();
-        
-        // Reinitialize on theme change for color update
-        themeToggle.addEventListener('click', () => {
-            // Color will update automatically in next animation frame
-        });
     </script>
 </body>
 </html>
